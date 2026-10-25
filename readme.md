@@ -90,4 +90,23 @@ git log -5 --format="%h %an %s"
 git status --short
 ```
 
-SVN 服务器 `https://10.94.149.140/svn/Exp01/trunk` 为原团队服务器；本次网络连接超时，未将已有 r4 记录误记为新的远程提交。SVNBucket 迁移需使用团队实际仓库地址完成，GitHub 不能替代 SVNBucket。
+SVN 服务器 `https://10.94.149.140/svn/Exp01/trunk` 为原团队服务器；本次网络连接超时，保留了原工作副本 r4 的证据。SVNBucket 托管和本机 GitLab 部署已完成，见下方实际验证记录。
+
+## SVNBucket 托管与 GitLab 部署结果
+
+### SVNBucket
+
+- 私有项目：`software_arch_exp01`，网页地址：https://svnbucket.com/detail/140975。
+- SVN 地址：`svn://svn.svnbucket.com/Zhangyuxin666/software_arch_exp01/trunk/`。
+- 本人账号 `Zhangyuxin666` 已完成检出、提交和独立目录复核；最终修订为 r4，包含 `readme.md` 和 `migration-verification.txt`。
+- 新增工作副本 `D:\SVNWork\SVNBucket-Verify` 已更新到 r4，README 的 SHA256 与提交工作副本一致：`220296354E9E5E7B6D31142D78A252B571F34C5D030BBDCA81A19579E893E852`。
+- 本次迁移原团队 SVN 工作副本的文件快照；原服务器的全部历史未迁移。中文提交说明使用 UTF-8 文件配合 `--file` 和 `--encoding UTF-8`，避免控制台编码影响。
+
+### 本机 GitLab
+
+- 本机已有 Docker Desktop，但后台启动在 `dockerInference` 处报错。保留其已有数据，另建 WSL2 发行版 `Exp01-GitLab`，使用 Linux Docker Engine 29.9.2 部署官方 `gitlab/gitlab-ce:19.5.1-ce.0`。
+- 实例地址：`http://127.0.0.1:8929`；私有仓库：`http://127.0.0.1:8929/root/software-arch-exp01`。该地址供本机实验使用，其他电脑不能通过各自的 127.0.0.1 访问。
+- 已推送团队 main 分支，保留团队提交历史，并在 `D:\SVNWork\GitLab-Verify` 独立克隆验证提交哈希和 README。部署配置保存在本仓库 `gitlab/compose.yaml`。
+- GitLab 配置、日志及数据分别使用 Docker 持久卷，位于 `D:\SVNWork\gitlab-deploy\wsl` 下的 Linux 虚拟磁盘中。
+- 本机启动脚本：`D:\SVNWork\gitlab-deploy\Start-GitLab.ps1`；停止脚本：`D:\SVNWork\gitlab-deploy\Stop-GitLab.ps1`。停止服务保留持久化数据。
+- 登录信息仅保存在本机部署目录的独立文件中，未提交到仓库或写入报告。
