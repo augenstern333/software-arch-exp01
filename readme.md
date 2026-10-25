@@ -2,7 +2,7 @@
 
 ## 小组成员
 - memberA：组长（请填写姓名和学号）
-- memberB：组员（请填写姓名和学号）
+- memberB：张雨鑫，学号 2024110548，GitHub：zhangyuxin666
 - memberC：组员（请填写姓名和学号）
 
 ## 操作记录
@@ -70,3 +70,24 @@ git status
 - 保存各成员客户端安装、克隆、修改提交与同步结果的截图。
 - 使用各自账号在 Issues 中进行真实交流并保留链接。
 - 本文说明不代表其他成员已完成同步、安装或 Issues 交流，需要本人实际操作。
+
+## memberB 实际操作记录
+
+- 操作人：张雨鑫（2024110548），角色 B，GitHub 账号 zhangyuxin666。
+- 2026-10-20：本机 SVN 工作副本 `D:\SVNWork\Exp01` 已同步并修改 `readme.md`；工作副本元数据显示最后修改人为 `memberB`，修订号为 `r4`。2026-10-25 检查 `svn status` 和 `svn diff`，均无输出，文件无未提交修改。
+- 2026-10-25：克隆本仓库，核对已有提交，保留 A/C 成员内容，填写 B 的真实身份并追加本节。
+- GitHub 仓库权限核验：`zhangyuxin666` 已在 Collaborators 中，具有 push 权限；另有 `augenstern333` 与 `sijiama3-collab` 两位协作者。
+- B 使用 `git pull --ff-only origin main` 同步，再执行 `git add readme.md`、`git diff --cached`、`git commit`、`git push origin main`。提交是否成功以 GitHub 历史及远程分支核验结果为准。
+- Issues 核验入口：[#1 我们三个人的提交记录都在 GitHub 上能看到吗？](https://github.com/augenstern333/software-arch-exp01/issues/1)。三位协作者与三位提交作者是不同概念，需逐条核对实际提交历史。
+
+### 交接给其他成员
+
+其他成员在各自工作副本执行以下命令，打开本节核对 B 的姓名、学号和操作记录，再由本人确认同步结果：
+
+```bash
+git pull --ff-only origin main
+git log -5 --format="%h %an %s"
+git status --short
+```
+
+SVN 服务器 `https://10.94.149.140/svn/Exp01/trunk` 为原团队服务器；本次网络连接超时，未将已有 r4 记录误记为新的远程提交。SVNBucket 迁移需使用团队实际仓库地址完成，GitHub 不能替代 SVNBucket。
